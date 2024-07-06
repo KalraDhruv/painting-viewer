@@ -5,10 +5,27 @@ document.addEventListener('DOMContentLoaded',function(){
     
     // Event Handler for handling image clicked
     thumbnail.addEventListener("click",(e)=>{
+
 	if(e.target && e.target.nodeName == "IMG") {
-	    figure.text
+	    figure.textContent = '';
+	    imageLocation = 'images/large/'+e.target.dataset.id+'.jpg';
+
+	    console.log(imageLocation);
+	    const image = document.createElement('img');
+
+	    image.src=imageLocation;
+	    figure.appendChild(image);
 	    
-	    console.log('You clicked image with id=' + e.target.dataset.id);
+	    const painting = data.find(obj => obj.id == e.target.dataset.id);
+	    
+	    const title= document.createElement('h2');
+	    const artist= document.createElement('h3');
+
+	    title.textContent = painting.title;
+	    artist.textContent = painting.artist;
+
+	    figure.appendChild(title);
+	    figure.appendChild(artist);
 
 	}
     })
