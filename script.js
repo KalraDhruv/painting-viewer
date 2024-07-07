@@ -14,7 +14,6 @@ document.addEventListener('DOMContentLoaded',function(){
 	    const image = document.createElement('img');
 
 	    image.src=imageLocation;
-	    figure.appendChild(image);
 	    
 	    const painting = data.find(obj => obj.id == e.target.dataset.id);
 	    
@@ -26,6 +25,30 @@ document.addEventListener('DOMContentLoaded',function(){
 
 	    figure.appendChild(title);
 	    figure.appendChild(artist);
+	    figure.appendChild(image);
+
+
+	    painting.features.forEach((feature)=>{
+
+		const upperLeft = feature.upperLeft;
+		const lowerRight = feature.lowerRight;
+		const description = feature.description;
+	        const rectangle = document.createElement('div');
+
+		rectangle.classList.add('box');		
+		const width = lowerRight[0]-upperLeft[0];
+		const height = lowerRight[1]-upperLeft[1];
+
+
+		rectangle.style.position = 'absolute';
+		rectangle.style.left = upperLeft[0]+'px';
+		rectangle.style.top = upperLeft[1]+'px';
+		rectangle.style.width = width+'px';
+		rectangle.style.height = height+'px';
+
+		figure.appendChild(rectangle);
+
+	    })
 
 	}
     })
