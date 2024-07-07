@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded',function(){
     const data = JSON.parse(content);
     const thumbnail = document.getElementById('paintings').querySelector('ul'); 
     const figure = document.querySelector('figure');
+    const textContent = document.getElementById('description');
     
     // Event Handler for handling image clicked
     thumbnail.addEventListener("click",(e)=>{
@@ -17,14 +18,12 @@ document.addEventListener('DOMContentLoaded',function(){
 	    
 	    const painting = data.find(obj => obj.id == e.target.dataset.id);
 	    
-	    const title= document.createElement('h2');
-	    const artist= document.createElement('h3');
+	    const title= document.getElementById('title');
+	    const artist= document.getElementById('artist');
 
 	    title.textContent = painting.title;
 	    artist.textContent = painting.artist;
 
-	    figure.appendChild(title);
-	    figure.appendChild(artist);
 	    figure.appendChild(image);
 
 
@@ -39,12 +38,18 @@ document.addEventListener('DOMContentLoaded',function(){
 		const width = lowerRight[0]-upperLeft[0];
 		const height = lowerRight[1]-upperLeft[1];
 
-
 		rectangle.style.position = 'absolute';
 		rectangle.style.left = upperLeft[0]+'px';
 		rectangle.style.top = upperLeft[1]+'px';
 		rectangle.style.width = width+'px';
 		rectangle.style.height = height+'px';
+
+		rectangle.addEventListener("mouseover",(e)=>{
+		    textContent.textContent = description;
+		})
+		rectangle.addEventListener("mouseout",(e)=>{
+		    textContent.textContent = '';
+		})
 
 		figure.appendChild(rectangle);
 
